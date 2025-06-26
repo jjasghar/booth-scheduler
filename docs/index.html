@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Conference 2024 - Innovation Booth</title>
+    <title>IBM Developer Conference 2024 - IBM Innovation Hub</title>
     
     <!-- Bootstrap CSS for responsive design -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- IBM Plex Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #f59e0b;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-            --dark-color: #1f2937;
-            --light-color: #f8fafc;
+            --primary-color: #0f62fe;
+            --secondary-color: #ff6e6e;
+            --success-color: #24a148;
+            --danger-color: #da1e28;
+            --dark-color: #161616;
+            --light-color: #f4f4f4;
+            --ibm-blue: #0f62fe;
+            --ibm-blue-dark: #0043ce;
+            --ibm-gray-10: #f4f4f4;
+            --ibm-gray-90: #262626;
+            --ibm-gray-100: #161616;
         }
         
         * {
@@ -29,17 +34,34 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: var(--dark-color);
             background-color: #ffffff;
         }
         
         .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+            background: linear-gradient(135deg, var(--ibm-blue) 0%, var(--ibm-blue-dark) 100%);
             color: white;
             padding: 4rem 0;
             text-align: center;
+            position: relative;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
         }
         
         .hero-section h1 {
@@ -65,12 +87,13 @@
         }
         
         .day-header {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #f59e0b 100%);
+            background: linear-gradient(135deg, var(--ibm-gray-90) 0%, var(--ibm-gray-100) 100%);
             color: white;
             padding: 1.5rem;
             border-radius: 12px;
             margin-bottom: 2rem;
             text-align: center;
+            border: 2px solid var(--ibm-blue);
         }
         
         .day-header h2 {
@@ -90,17 +113,19 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary-color);
+            border-left: 4px solid var(--ibm-blue);
+            border: 1px solid var(--ibm-gray-10);
             transition: transform 0.2s, box-shadow 0.2s;
         }
         
         .talk-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 15px -3px rgba(15, 98, 254, 0.15);
+            border-left: 4px solid var(--ibm-blue);
         }
         
         .talk-time {
-            background: var(--primary-color);
+            background: var(--ibm-blue);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -108,6 +133,7 @@
             font-size: 0.9rem;
             display: inline-block;
             margin-bottom: 1rem;
+            font-family: 'IBM Plex Mono', monospace;
         }
         
         .talk-duration {
@@ -216,7 +242,7 @@
         }
         
         .btn-qr {
-            background: var(--secondary-color);
+            background: var(--ibm-blue);
             color: white;
             border: none;
             padding: 0.4rem 0.8rem;
@@ -224,10 +250,11 @@
             font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.2s;
+            font-family: 'IBM Plex Mono', monospace;
         }
         
         .btn-qr:hover {
-            background: #d97706;
+            background: var(--ibm-blue-dark);
             transform: translateY(-1px);
         }
         
@@ -283,8 +310,8 @@
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="container">
-            <h1>Tech Conference 2024</h1>
-            <p class="lead">Innovation Booth</p>
+            <h1>IBM Developer Conference 2024</h1>
+            <p class="lead">IBM Innovation Hub</p>
         </div>
     </div>
     
@@ -311,7 +338,7 @@
             
             <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <p class="lead">Join us for exciting 15-20 minute talks covering the latest in technology!</p>
+                    <p class="lead">Discover the latest IBM technologies and solutions. Join us for insightful 15-20 minute talks from IBM experts and partners!</p>
                 </div>
             </div>
             
@@ -336,22 +363,22 @@
                             <span class="talk-duration">20 min</span>
                         </div>
                         
-                        <h3 class="talk-title">Introduction to AI/ML in Production</h3>
+                        <h3 class="talk-title">IBM Watson AI in Enterprise Applications</h3>
                         
                         <div class="speaker-info">
                             
-                            <img src="https://via.placeholder.com/150x150/4CAF50/white?text=SJ" alt="Sarah Johnson" class="speaker-avatar">
+                            <img src="https://via.placeholder.com/150x150/0f62fe/white?text=SJ" alt="Sarah Johnson" class="speaker-avatar">
                             
                             <div class="speaker-details">
                                 <h4>Sarah Johnson</h4>
                                 <div class="title-company">
-                                    Senior ML Engineer at TechCorp
+                                    Senior AI Engineer at IBM Research
                                 </div>
                             </div>
                         </div>
                         
                         
-                        <p class="talk-abstract">Learn how to deploy machine learning models in production environments with confidence. We'll cover best practices, monitoring, and scaling strategies.</p>
+                        <p class="talk-abstract">Discover how IBM Watson AI is transforming enterprise applications. Learn about Watson's latest capabilities, deployment strategies, and real-world success stories across industries.</p>
                         
                         
                         
@@ -381,14 +408,14 @@
                             </button>
                             
                             
-                            <a href="https://sarahjohnson.dev" target="_blank" class="speaker-link">
+                            <a href="https://research.ibm.com" target="_blank" class="speaker-link">
                                 
-                                <i class="fas fa-blog"></i>
+                                <i class="fas fa-link"></i>
                                 
-                                Blog
+                                IBM Research
                             </a>
                             
-                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB70lEQVR4nO2bTYrcMBBGX0WGLGXIAeYo9s3mTLlB6yhzgIC1HFDzZSGp2zMDoZ3gtgNVC2Pkt/igKNVft4kHLX17lARHHXXUUUcd3RO1ZgMkMyONALkfz7sLcHQLOkmSFmBSweZ6GiRJ+ojuI8DRLWjuIZRsQHobsBmo8fYMAY7+BWqvC5Be3u0gAY7+wYavR6EYMeiLuw7X6mj3VhSQQWkMKM1DERnWvfPhWh1lXUcQxLTcH/14kqTL4VodrbF1DyGll0I/+ziVOlyro73fGmmtFnmg9Vu3D/sLcPQxazdhLO1tWoJ0qR/KCvGb8ARod0VUTVS6xOajlrdi8bx1GvQWUQCxDTR6WIXuRvfWOdAeW4C0BFHnTb0wbL50b50DXWUrph5R9f5ruax43jodGksdEQKgS+7DQhvB5icIcHQDms0gtj7ZXhewORZ0yd99Bn8a9HPd3l0Wmo9uyctvwhOgLSndjPtWa7oVGO6tU6Gr3TGx9AlGbmnM5t0FOLoFXe2O38yk5WqtMHySAEcfsb4xySNMP0FkqKutZAD5R9GeAhz9N7RvTNos491/RXNetI3fr1ab5WRewZ8H/bw7tklXEzkUq7fjfcd1uFZHm7dqjiJAGn/RC4xQSOOyrwBHN6Dm/1pw1FFHHXX0P0J/Aw4DOZ6N0Ng2AAAAAElFTkSuQmCC', 'Blog', 'https://sarahjohnson.dev')">
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB+klEQVR4nO2aTY6jMBBGX42RsoQbcBRzs1Fuho+SG8AykqNvFjZh0uqWSEsQFlWLKMBbfFLJ9WsTGy392UqCo4466qijju6JWrWm/IO5Aebl9bC7AEffQaMkaQJJGbMOgCBJ0iu6jwBH30Hn5QilDjQun82sOUaAo79B460B2vsS/w4X4OjP1nz30uLtIpiPEODoL9BWKvEv9Rld+4wN1DR2iABHN1g9W8kACOVYWbw1GXjY/gIcfQO1L5Mno50wCPkr6ZOns6Bm3cNsmJtaDsYJbJjrwbNhdwGObrPSUUXlZ9MVSgZbU1bpusaPa3X02W9dBLMZqc/YX2VsmC/S2Eo2HCDA0Q1Wgp1SFyD1wuIEYu4WYH5WGh/X6mhNTVFQPJPspcCIAttTgKPv563Sb7UScQoiTgBtTWiet86CLt4iVEeVWe4EyyO1/HBvnQaNykB7N6LqGIPU300jwWfwp0GfFXzdmECblx8onZdHwnOhdUVS8hbUSLiutnYX4Ogb6Lo71tUusqG0Xw3g/db50DUSxulhuvZ3+y8cHiDA0U1W89ZELQLLDGpaPhc3et46KZq6IFIHQJBGHn6L5rSoND1MY5vR2Ga/l3Eu9LWCD8+acG2R8e74bGgys/Vemg1txgaCdO39htp50K+745/Nd8eOOuqoo45+Hv0HFS8noCD0Xp0AAAAASUVORK5CYII=', 'IBM Research', 'https://research.ibm.com')">
                                 <i class="fas fa-qrcode"></i> QR
                             </button>
                             
@@ -405,22 +432,22 @@
                             <span class="talk-duration">15 min</span>
                         </div>
                         
-                        <h3 class="talk-title">Cloud Security Fundamentals</h3>
+                        <h3 class="talk-title">IBM Cloud Security & Zero Trust Architecture</h3>
                         
                         <div class="speaker-info">
                             
-                            <img src="https://via.placeholder.com/150x150/2196F3/white?text=MC" alt="Mike Chen" class="speaker-avatar">
+                            <img src="https://via.placeholder.com/150x150/0f62fe/white?text=MC" alt="Mike Chen" class="speaker-avatar">
                             
                             <div class="speaker-details">
                                 <h4>Mike Chen</h4>
                                 <div class="title-company">
-                                    Security Architect at SecureCloud Inc
+                                    Cloud Security Architect at IBM Cloud
                                 </div>
                             </div>
                         </div>
                         
                         
-                        <p class="talk-abstract">Essential security practices for cloud infrastructure. Discover common vulnerabilities and how to protect your applications.</p>
+                        <p class="talk-abstract">Explore IBM Cloud's comprehensive security model and Zero Trust architecture. Learn how to implement enterprise-grade security for your cloud workloads with IBM's latest security technologies.</p>
                         
                         
                         
@@ -438,14 +465,14 @@
                             </button>
                             
                             
-                            <a href="https://twitter.com/mikechen_sec" target="_blank" class="speaker-link">
+                            <a href="https://cloud.ibm.com" target="_blank" class="speaker-link">
                                 
-                                <i class="fab fa-twitter"></i>
+                                <i class="fas fa-link"></i>
                                 
-                                Twitter
+                                IBM Cloud
                             </a>
                             
-                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB6klEQVR4nO2bTYrcMBCF34sFs5QhB5ijyDfIkXI16Sh9gIC1bJB5WUh2e2aycAfcVkjVSj/f4kFRUqnKpnDQ0rejJGCooYYaaqihZ6Js5kCOAJAdgLwuT6cLMPQZNEiSZkARAOALOGGQJOkjeo4AQ59B8xZCWIhEV8fkOupIq6GfzJeLBRj6BJrd17Vetf5H6OoVLwAZQJgXMMzf6/L+7Xy5VkMbmkiSI8Apv20uWmpK+AoBhh6xGlsfyk8Lld7vbPF2tgBDn0DRcnRfgDAPklRqQr9OpZrfx8u1Glq9pbi9rcK8f3Ttkcu1GrqivgDIDoq+1Kl0exPgJU4vEGDoEXtEVDsOVSDNaKMIwE7CXtDdvVV9BGBzmd1bnaGbt6Tmo11sPdbMW12gO2/tgmm3AdhJ2BsabiTg7+SUXQurRFIRg9Xgu0G3euBQCABK4wCk8VfdYJhH6kwBhv5NLaPUgkZz2Y9BDLFNTxVg6NPoo3es6O9ce8cO9t7qEd16x0B24OTv/NLk6kWroVvvmJOXEG6u1uVfJ8DQA/aHruPilMahEBhqcFmW0SuquLaNJRXYN09dol5SBMCfM4AwLwQy2QqILxBg6AFrgZTqDTUA8MUxRKGehOldaxp/uVZDaX8tGGqooYYa+g+hvwGAOhub/sxBBwAAAABJRU5ErkJggg==', 'Twitter', 'https://twitter.com/mikechen_sec')">
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB+UlEQVR4nO2bQc6bMBCFvylIWYKUA/Qo5mY9U2+Aj8INYBnJ6HVhm/752wVNRaDqzCIJ5Fs8aTT2mzGY2Bnxy14SHHXUUUcddfRI1Eq02MBqNiwtNiz19nC4AEd3RZu/wgiw3FG0RkACaBIAdqQAR19Al1pCYQazfjWNgJm17xHg6EtolwsKG04S4Oh+NParSdPt1z7selr/O7Suc52ABQjTTbYV2Mecna7V0YJGMzPr6/oXphZgzZbwHQIc3RO5tp6WvdUUvz5Mn26fr9VRJEnZW4S5kUZAmimXkkSQpPF0rY7Wfuv7TcDDRDfnBkvwyIugjhTg6Cu1JZXLGTR2CYISGjuvrcuhYTLLeYs92LfpJqLdBIu7jMuhsS/DwtId521sNYKkZ/QYAY7uiuIjsqNIQCcVl5ENRsqIr4QXQJ89IXm3KlH3Mt+3roJutQWSEsXBZ4OR0EjjLuMyaM2War+l+pH/Lmn0bF0C3WYZ5VTLwvgoViOM29HWgQIc/eNs1aQ0SdG2dni5J+iE5bPK07U6WvstfXSCNiwt9aRr9X7rcmg9O86HxbFfjfhz/P4GAY7uiPZ3N8VyT7Y9l3GoAEf/ApWUsGH75c9lXBHtpPLYTE9uuvKIMMxvEuDoniizjByNat6aMo3yGfyVUPO3Fhx11FFHHf2H0B8uISPH3kdiSwAAAABJRU5ErkJggg==', 'IBM Cloud', 'https://cloud.ibm.com')">
                                 <i class="fas fa-qrcode"></i> QR
                             </button>
                             
@@ -462,47 +489,47 @@
                             <span class="talk-duration">20 min</span>
                         </div>
                         
-                        <h3 class="talk-title">Modern Frontend Frameworks Compared</h3>
+                        <h3 class="talk-title">Building Modern Apps with IBM Carbon Design System</h3>
                         
                         <div class="speaker-info">
                             
-                            <img src="https://via.placeholder.com/150x150/FF9800/white?text=AR" alt="Alex Rivera & Jamie Park" class="speaker-avatar">
+                            <img src="https://via.placeholder.com/150x150/0f62fe/white?text=AR" alt="Alex Rivera & Jamie Park" class="speaker-avatar">
                             
                             <div class="speaker-details">
                                 <h4>Alex Rivera & Jamie Park</h4>
                                 <div class="title-company">
-                                    Frontend Developers at WebDev Solutions
+                                    Senior Frontend Engineers at IBM Design
                                 </div>
                             </div>
                         </div>
                         
                         
-                        <p class="talk-abstract">A comprehensive comparison of React, Vue, and Angular in 2024. Which framework should you choose for your next project?</p>
+                        <p class="talk-abstract">Learn how to build beautiful, accessible, and consistent user experiences with IBM's Carbon Design System. Discover the latest components, patterns, and best practices for modern web applications.</p>
                         
                         
                         
                         <div class="speaker-links">
                             
-                            <a href="https://alexrivera.dev" target="_blank" class="speaker-link">
+                            <a href="https://carbondesignsystem.com" target="_blank" class="speaker-link">
                                 
                                 <i class="fas fa-link"></i>
                                 
-                                Portfolio
+                                Carbon Design
                             </a>
                             
-                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB6UlEQVR4nO2ZQW6kMBBFX43Z09IcIEeBG8yRRnOz5ihzA3sZCfSzsA1ErYzojCCWUrUAbL3Fl76KqrJNHIzpx1ESHHXUUUcddfRM1Ep02AgwmZmNqW6Ppwtw9FB0+TXcAdJPgKUDwgwpzADYmQIc/QSaagpNtyCGCDYCZtZdI8DRA9E97KRuZnp5NZGuEODof6C6Awx/awW7XICj/4iaW72AVGqUQOvXyQIcfR6dzMzsBqVkpQ5gyS3hFQIcPRI5t7YUEmkxwavpfWY1oNXROm/dtv4vyEaCgMXK5HW6AEePhSRJd4Kgn9clMEjv9r5cq6PZCoYIUgzZNymSK1hZulttoDVx+vKAXmJY9xTx3GoGLblFLwFBDJrrHuv45W61ge6dKV+htIKDtDPP3WoALVbskqmfS8mSZsDrVkNodStCrlul3wAGbb65W02ga92aYYhB2/+vhudWO+juT7j1GyXLVLtDd6spdLs7zk0gqauPawQ4eizKdJyLV9jNW+UsA7yDbw5d745hMf2xLp/LXyfA0U+guhNkv2NdKn6IniPA0efQxZhui+UWcXqZay1rUes3Qx/vjnvQ9CvCdMN2xNdrdXR38kQ5J1zvSeJ6Gu9dRhvo491xeZSJOSfdiQIcddRRRx119An0DT8db7/9+GisAAAAAElFTkSuQmCC', 'Portfolio', 'https://alexrivera.dev')">
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB70lEQVR4nO2bvY3jMBCF3zsypzrYUqjOrqbrQCpFHVDhAhTeBiQl+zY4GYZsHnYmYEB/wQMG88MZi8JJm3+dJQFDDTXUUEMNvRJlNQ+OqwdQjnY9Xi7A0EfQKElKgCYAmAeAI5wkSffoNQIMfQRdWwjNH588fibpXyPA0BPm/76IiwcREoT1FQIMfQoNkrR4cHyTAEP/iQaplayNmIdawSTl1wgw9Izd9hFwQkzH0a6jJE1v12po8dZhQMgAglT7xN3MW72g5LCR4+qhCU6IC1kfXQA4Xi7A0HNWAye0Y390HSXLYqsXtNatWqOcNJVMmKvLpj0nmrfej7bAKY66r1TJ1T7RvNUZGjJKoZrpwREbOWIjok2eOkJbJlRuIQTgrjHMVre6Qdt7Kxypz6k0GDG5GlaWCTtB9y7DqWa9Urxy6QlrQ2/e6gPdp7obgXUA4h+fiZBEAGBMA3WlAEOfm2XUFrGEWkz23uoNPXbH0sK231o9gCBxvFyAoY+gZSaYgNIJInyyNoZo++RutBq6747JAeDvxQMzSZSC9gIBhp6wb7tjYPMCstc8uhJcjNN1Agx9wlvC6kHAiQgJN3/ReL9WQ/fJUx1jkB8ZdRC/kjcryX60/lz0++64jZqqB20G3xFK+2rBUEMNNdTQ/wj9AsclfazYjWLhAAAAAElFTkSuQmCC', 'Carbon Design', 'https://carbondesignsystem.com')">
                                 <i class="fas fa-qrcode"></i> QR
                             </button>
                             
                             
-                            <a href="https://github.com/alexrivera" target="_blank" class="speaker-link">
+                            <a href="https://github.com/carbon-design-system" target="_blank" class="speaker-link">
                                 
                                 <i class="fab fa-github"></i>
                                 
                                 GitHub
                             </a>
                             
-                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB/0lEQVR4nO2bwW3jMBBF36wE5CgDW4BLoTrYkoKUlA6kUtIBeTRA4e+BpK14LwoCy1pk5mKDfIcPEDOc+bRNbIz511YSHHXUUUcddfSRqNXosTGZ2Zh6ILXl8eECHN0WkiSCJCl20kQnTYNEiJ1Wu9PTtTra1890gvAOhPgbgz6LBAZdfqgAR7+FDhlgafVvfwGObkfnE2ii+3cOO57WH4e2SjgISED4sLIiEqzP7OlaHa3obGZmJ7CRToQINrKUlnAPAY5uiZJbn8reYszni+lu+flaHa0dPEOmtOwTnaQI3sEfD23zVmxTFkNGiiAprxA/rQOgLbdWGUU9rWnI1DnZT+tY6HAx5nNGb6e2FT6q/bSLAEe3RClzirUTrDdYqY6ffCnPreej1y5D5d4q9a9WQomg7PfWYdBVT9gcjJuN0b55bh0LDbGTvepiUlys9RuLrT2oo2j9wejqZqIkU+kEm/F+vbw8tw6Ati6jxd1M7Kd1QPT2dqy388WYTwCpBwbJxocLcPQraH07BkgvspHFbi9dewhw9Ctoqj+/sNe4WBmM52a/a9pBgKMbor9fmM+513zOPddHfgvT4wQ4+o3TEqnHwseLmP9EbLX1dK2OXn1CSRNgYzHiLwYsVt2oHQQ4uiWaBw/c5q2bL+8e/JFQ838tOOqoo446+h+hfwFQ+GuMQXB9FwAAAABJRU5ErkJggg==', 'GitHub', 'https://github.com/alexrivera')">
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACZklEQVR4nO2bTWrkMBCFX40MWco3yFHkmw19M+sofYCAvAxIvFmUJHcShp4Qx9MKpYVRWx+moKhfVQvxmRV/fQoHjDfeeOONN974v/FS16Q7xBlAlAnA1s6WE+Ux/mA+kCQTgMAMhOsEWXwGAEeS5Fv+u+Ux/mB+qxbKy+yo9ottgiwARGQ6Wx7jj+Gn9y9CKh/efeH7xj8WL0vbkQng+p/lMf4Y3pOqyyhPREiAyFzVTTKfLY/xh/JRRERmACG1o7ormj6fK4/xB/Eaa2+alPE5g9jQHnjbwHw0+Y3/F14zZC14UaSWRv61l77F6t+Rea4oAvgMhOSIOJfqruvpyfIYfxTfaiH/Mkm4TplRnCZTBAqIbYYAjnKOPMYfy6M1pxw1TQ4J+iCZwdWTml2TJNdHk9/4O0v1G5i7G3ZaKdV2ZdoR0+94fM2fozgK/MvEuADqruFz72T1ntajyW/8nbX7Z6iTTrtrbjYdzH5H5VEDa0JVKJOjRt3bSGzxd1C+Kk/TKKB1rXw1WOz3g2a/Q/NFVIOXZxIhFeGKImQqAmzWnxyU7/EXgAbhbsnwuZ16s99B+R5cM1Shq+9FMEltZwWLv6Py3UJba1LNFK7HX2C3ZNPvmHzLmjPqaA5KDbiq5O2Jspwoj/HH8vv8JHkV0XbWZQaAbaozd2fKY/zBfJ+fFGnzdfL7KvVOaTfnR5Xf+Dt8n59c97ten3WwA3F2Nh/7Q/iaNQPqmrVc2mw+9ofw+yQH13aThMBX889j8reXf0zuplLSn5pa2f3vqPyH/tW7+jdY/2poXuz/3cYbb7zxxht/Ov8HtPC+M5OgV8IAAAAASUVORK5CYII=', 'GitHub', 'https://github.com/carbon-design-system')">
                                 <i class="fas fa-qrcode"></i> QR
                             </button>
                             
@@ -530,22 +557,22 @@
                             <span class="talk-duration">15 min</span>
                         </div>
                         
-                        <h3 class="talk-title">Database Optimization Tricks</h3>
+                        <h3 class="talk-title">IBM Db2 Performance Optimization & Analytics</h3>
                         
                         <div class="speaker-info">
                             
-                            <img src="https://via.placeholder.com/150x150/9C27B0/white?text=LW" alt="Dr. Lisa Wong" class="speaker-avatar">
+                            <img src="https://via.placeholder.com/150x150/0f62fe/white?text=LW" alt="Dr. Lisa Wong" class="speaker-avatar">
                             
                             <div class="speaker-details">
                                 <h4>Dr. Lisa Wong</h4>
                                 <div class="title-company">
-                                    Database Consultant at DataExperts LLC
+                                    Principal Database Architect at IBM Data & AI
                                 </div>
                             </div>
                         </div>
                         
                         
-                        <p class="talk-abstract">Simple yet powerful techniques to optimize your database queries and improve application performance by 10x.</p>
+                        <p class="talk-abstract">Unlock the full potential of IBM Db2 with advanced performance tuning techniques and built-in AI capabilities. Learn optimization strategies that can improve your database performance by 10x.</p>
                         
                         
                         
@@ -563,14 +590,14 @@
                             </button>
                             
                             
-                            <a href="https://scholar.google.com/lisawong" target="_blank" class="speaker-link">
+                            <a href="https://ibm.com/analytics" target="_blank" class="speaker-link">
                                 
                                 <i class="fas fa-link"></i>
                                 
-                                Research
+                                IBM Data & AI
                             </a>
                             
-                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACe0lEQVR4nO2aQYrcMBBFX8WGWaohB+ij2DfImXIz6yhzgIC9HFDzs5DktnvIJAMe0wqlRWO33+LDp0pVJZn4zIrfPoWD884777zzzjv/J97K6vMT0cxg6bFxqd/GE/U4fzA/SJJmkJSwESBe30wTnSRJe/6r9Th/ML/UCI0X0EQnhtceGwEz68/W4/wxfP/4x/DawzBfDIKws/U4fyz/zl8AI6RecTTEcq4e57+GD5ImgHhNaFpexDB3edeVlM7W4/wxPNviia64uv2p3wZJmp5Nv/Mfr5yfN0PKeE0AN4PwZtp9O0GP88fyNX5DgmHupCms4Rwkaa79kcdvi/wmP2sKiWLoDJqoW+8wF879bY2vvq1bL0HaGFrsLkHs/rbGl/jNZVRQXXMJ503O9vzcIs/d0By1E10N511qdn+b5HP9bMOUekHqLb/qZkTrBAu7Idaz6Xf+L+thm61V832qsXbCHr/N8mbXt9LwTkuP2aV8zkX0dLYe54/i1/63FNHZy+G+JyuhaS28PH4b4zf1833SISmR/X1ol9zfxvh38yvtThVKTHt/1Cr/OL/aPA218AJ8vtEov8vK9cAoTyo3k2g8PzfN19YoAUGyEYClz0GcN+Ez9Th/FF/mG+WtS4oGij/ACL8Mlu9pyz+bfuf/ib83RISEjXTK8VsKr5vt+a/W4/xB/PZ8Yb2QU1y938pZyy3ff1vns41LD9Fe1uOkzvff/4PXTzOzMdT5RrzczMbFPD+3ydf7sUHcz4oEN2yYajscL12yc/Q4fyxf/I3Zvg6gS7BcAG490GOEuV6zezb9zn+8Hu9PlqcggE7v+GfT77zzzjvvvPMt8r8BcVX+j0HM7xYAAAAASUVORK5CYII=', 'Research', 'https://scholar.google.com/lisawong')">
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB7ElEQVR4nO2bQY6DMAxFv4dILNMb9Chwtd6M3CjZE/1ZxAE66ki0EiUS9iIi5S2+FNn5iakQOyP87CUBQw011FBDDT0SFQ0HGZFFxuQApPrzeLgAQ99BB5JkBBCkJ8INkBEdSZLP6DECDH0HTZpCZMwCIAsAQETcdwQY+hnakVMZThJg6H/h/swFgLw+g52u1dCKemoyDZzLICMAkvN3BBi6Hw0iInIDgNRTPSFysYTfEGDoniiV8Kn0LS7DP1fE07UaiurR1VuUp9W3a2EkOZ2u1dCCckIWGX3do8ItCxkBPm5fEWDorqie0EcIkpsJZPWEYexmAXrKkQIM/bQSerK4Q5LEELvN1Cpha2gS0ZpY5loOddqW1gujnPwMwJMyoiPC6tvrHVQzWq+Mbiohhgho/asvik80T9gIqovCCHXr8DPKuqHmm+1braDFEwr87BikoyD1FHhCkBwwTNmxEa2G1tyqockUtf6tg+VWM+jaOy79rXCfAST3Aj1GgKHvoEvvuFzoDjGL7lvIop2uVrQauvaOH/fl+mlj448XYOgn6BCB0jsZSG7LYXtaL4+WzWtKrlztIty1L9mg1uuhejrWfWs5GNcnfWGesA10ucsAAGzXSLv/3hx8O+g/X8y8CPvXgqGGGmqooeejv+nPOl1qh6w7AAAAAElFTkSuQmCC', 'IBM Data & AI', 'https://ibm.com/analytics')">
                                 <i class="fas fa-qrcode"></i> QR
                             </button>
                             
@@ -587,47 +614,47 @@
                             <span class="talk-duration">20 min</span>
                         </div>
                         
-                        <h3 class="talk-title">DevOps Pipeline Best Practices</h3>
+                        <h3 class="talk-title">Red Hat OpenShift & IBM Cloud Pak DevOps</h3>
                         
                         <div class="speaker-info">
                             
-                            <img src="https://via.placeholder.com/150x150/607D8B/white?text=CM" alt="Carlos Martinez" class="speaker-avatar">
+                            <img src="https://via.placeholder.com/150x150/0f62fe/white?text=CM" alt="Carlos Martinez" class="speaker-avatar">
                             
                             <div class="speaker-details">
                                 <h4>Carlos Martinez</h4>
                                 <div class="title-company">
-                                    DevOps Engineer at AutoDeploy Co
+                                    Senior DevOps Engineer at IBM Hybrid Cloud
                                 </div>
                             </div>
                         </div>
                         
                         
-                        <p class="talk-abstract">Build robust CI/CD pipelines that scale. Learn from real-world examples and common pitfalls to avoid.</p>
+                        <p class="talk-abstract">Accelerate your DevOps journey with Red Hat OpenShift and IBM Cloud Pak. Learn how to build enterprise-grade CI/CD pipelines that scale across hybrid cloud environments.</p>
                         
                         
                         
                         <div class="speaker-links">
                             
-                            <a href="https://github.com/carlosmartinez" target="_blank" class="speaker-link">
+                            <a href="https://openshift.com" target="_blank" class="speaker-link">
                                 
-                                <i class="fab fa-github"></i>
+                                <i class="fas fa-link"></i>
                                 
-                                GitHub
+                                OpenShift
                             </a>
                             
-                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACZklEQVR4nO2bQYrkMAxFn8YFs3SgDzBHca7cN0hulCwbXPxZ2E7SBU13M5lMeZAXoYzfQvCRLMkqE99Z849v4eC8884777zzzn/EW103YG2f2cxgbWfjhfY4fzKfJEkLmA0AMWMjQUCQJOk9/7ftcf5kfm0empTLVhN3A6A69qX2OH8Of3vYax4WjCgsLQOWXq+1x/lz+Ud9DW6ZNIHmIWRYr7XH+XP5pm8URcv0+gJwvwF3E8CxBfJs9jv/JX42s5paAbD+FGkJspF7SZ+vtcf5k/jiv++alHfT/OvNmIeAHs6ezn7nP1m1+IkZaQFJGdIStNdMpKVymp7Nfuc/WVW3mCkib7+AUIK0pqgqt+vbGV/11VK1rPUvoAko0u6c69sZX+NzWoKa1wJEaQ/SHp/75dv9S1Bx2HIJL1BELgcx4/G5S37Lr1qSNcVcQnON1FHH5fp2xre4Wzah3rUTQS1IN9D9t0f+kD/X0kh50zwc4rP7b5f8MT6nJdRMumRapSqqwru+XfKtPtoU3NKtkjpDK5I8PvfIb/VRS50nYPfkljp7/twpv/Wf883SJCAuWGlCjwEjXmuP8+fyRV8rD74WssEtC4Ql3a2NY734fE6f/OHWrZFamZpkAXv/yuNzx/xhfnIeQut0EFT9d+t5PKn9zn+4mtfWR4b9U1136156fdQzv81PAtgY34x5oA5BJ2Xq6bPa7/zXeBvLVGyQptWsXL2zmXl8/i/41pWEQxMLgmz8J/Y4/2f84/1bX4Jhm+TYm5R+//bHb++/wPH96Di6UaezXN8OefP/dzvvvPPOO+/85fxvEBoLqhGYi9kAAAAASUVORK5CYII=', 'GitHub', 'https://github.com/carlosmartinez')">
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB50lEQVR4nO2bS4rcQBBEX1oCLyXwAeYoqiv7BtJR+galpUEivKhPy5gBdYM+w2RuWi3eIqCIrKyobhM7a/qxlwRHHXXUUUcdPRK1XC0WWM3C3GJhLq/D4QIc3VVt+hhGgPkXmqwRsCDmZgHAjhTg6BvoXCw0RDDr17REZtaeI8DRt9BuAWj+n+xvqPXbo1O/mvRosXCNAEc/r9LnOgEzMDx+yrLBYOuwy7U6mtHJzMx6sAAwPFqANY2EZwhwdE8lb/2zSa2m6eOPZb8dLcDRF1AkSWm2GGIjjYAUyV8liUGSxsu1OlrOW7/rbtXFdMDKBqM673KtjlLcs/C0lcY6ZYyde+s+aFotjd1SniA1wQ3jq3Ur1AIAc0s+HadtrO5qhwtwdF8954hkoVQRyrtqusu1OrqZCaXYpOUpVdqhd8J7oUNsZKFbgLmt/W81jc/E8C5avzFaOmEkewsalSc2m5d76wZozTJEid9Xy1PGWK+2DhTg6OszYb07lrTkLCOPiJKFwwU4+go61Elw6htZmM22VjtegKOvoOXu2MLcwtSTcvnzBDj6LprjJ3LIe74AR/ehUqzRRrf47zLuiXY5IrQAlLBwNYZ4kgBH99Q2CaSct9KZuJM8g78Vav6vBUcdddRRR78Q+hdC/CLWQTTgjwAAAABJRU5ErkJggg==', 'OpenShift', 'https://openshift.com')">
                                 <i class="fas fa-qrcode"></i> QR
                             </button>
                             
                             
-                            <a href="https://devopsblog.carlosmartinez.dev" target="_blank" class="speaker-link">
+                            <a href="https://ibm.com/cloud-paks" target="_blank" class="speaker-link">
                                 
-                                <i class="fas fa-blog"></i>
+                                <i class="fas fa-link"></i>
                                 
-                                Blog
+                                IBM Cloud Pak
                             </a>
                             
-                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACfUlEQVR4nO2bQYrjMBBFX40CvZShD9BHsW8wR2r6SHMD6yh9gIC9DNj8WUiKkwzTTBjHHUNpISz7LT4UVaoqySbuGenHXTg477zzzjvvvPN/462MA9YBpGbOSxjrt25DPc6vzLeSpAGA2ex9CKLVyawjSJJ0zT9aj/Mr82P10NQEAbPpowH1QPHkTfU4/yh+LLa0988XWfftepxfk1cPZCOn5rz8Pj3O/x9fA28UMIIBCATp59FUlpvpcX5dnsvkiSDa4Waq31pJ6p9Nv/Nfj+y/i4eKcTalt5MpNaF48oZ6nH8Eb9YsaXKQdQRBPJl1zEby+nevfI7P6rNBpRKGgYsnluWz6Xf+63EubGdT6gwlCxOt5vzBIEzW9iXxej79zv8Tn9OoKEGcsG58kT7MLPtvambbVo/zK/ElPmuAMmnKVa/6OAFRyu/k8XmHfKmP2mpBcpGUjRx8/907f/bfUuteNawW+wa5fXfJ17hbY3Excqw9j3ywpMn9d598jcrVtEuStTz5/rtf/mzfakEt9e/Sn4zuvzvlb/NnyAf60zlIh7o7u313zEeJ9FZ2XevGcjWnRuqT17/75K/aVJ8GxKMpNWGCeDzAaEAc5P2rXfKXu26uhIdS/9ap9KQ9Pu+SP/svAGFSajCSnYHxdSJZmDbS4/xD+LYmWdbFklrpo4GaOk83/KP1OL8SX8+PxgbaXwAEGXE+5FQrGZCaY1k+nX7n7+PVj4c82fsQlD1ZQ6g3KZ9dv/PX43D7oh1eodV8UN6EI5C6zfQ4/xg+lq6VdZT617rcs5xrEbypHufX4f+4P0lczn/LweFF99Lro53x5v93O++888477/zm/G/pNcswCMzAEAAAAABJRU5ErkJggg==', 'Blog', 'https://devopsblog.carlosmartinez.dev')">
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB6klEQVR4nO2ZTaqmMBBFT7XOdQe9lGQHvaa3M11K70CHDYb7BknU7oaHfqCf8CoDkXAGF4pbqR8TB8/44ygJjjrqqKOOOnolauW0WARgNrM41+t4uQBHz6BBkjQBkMzspwQ0kiT9jV4jwNEz6FwtNPaNCFO5NrP2HgGOvoTOLYxm9jYBjh5GNQCbt+4X4OgXp+a5TsAMBiDQ+nexAEfPo6OZmfVkW1mcW8j1xpYTn6L1G6PZW5uFxJxMzMVg1wtw9IV+q9/qv0YWuz8GJMumi5cLcPTYyS1VbrW6pXReQ7dQWq36p+HtWh2tQaFRLgdzTzxBDtlQW2SP1gPQ1ULlo6FT7o41UPpkj9bj0GSE3y2EKVnOiZBMHz1YvEOAowfOLhNKC4SpKaVgkESQv1vPQWuVISm/UQNQ8t8E4O/Wg9BdTZhdFqZmDd+Cv1uPQtdMyL7+K7YC3FvPQ4uttFBHTY22d+sGAY6eQLfdsaQFi0DendwkwNEz6Lo7trj1yd2CT54eia67Y0hmsQaK3ZDjMVodrUfD3KKPPlkt45N76zFo++/FGMHClGDsm4Xx19LqSgGOvhCtdXcclHJ4xNzbjni/Vkd3/RbQ5BnUbt6kibpFebtWR//fHedPHRZm010owFFHHXXUUUdPoJ9dF02JDXHkgAAAAABJRU5ErkJggg==', 'IBM Cloud Pak', 'https://ibm.com/cloud-paks')">
                                 <i class="fas fa-qrcode"></i> QR
                             </button>
                             
@@ -655,7 +682,7 @@
     <!-- Footer -->
     <div class="footer">
         <div class="container">
-            <p>&copy; 2024 Tech Conference 2024. Schedule generated with ❤️ using Python.</p>
+            <p>&copy; 2024 IBM Developer Conference 2024. Schedule generated with ❤️ using Python.</p>
             <p class="small text-muted">Last updated: <span id="lastUpdated"></span></p>
         </div>
     </div>
