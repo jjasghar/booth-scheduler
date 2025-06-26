@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Conference 2024 - Innovation Booth</title>
+    
+    <!-- Bootstrap CSS for responsive design -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #f59e0b;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #ffffff;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-section .lead {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+        
+        .info-section {
+            background-color: var(--light-color);
+            padding: 2rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .day-section {
+            margin: 3rem 0;
+        }
+        
+        .day-header {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #f59e0b 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .day-header h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .day-header .date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .talk-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .talk-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.15);
+        }
+        
+        .talk-time {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .talk-duration {
+            background: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .talk-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.75rem;
+        }
+        
+        .speaker-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .speaker-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-color);
+        }
+        
+        .speaker-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--dark-color);
+        }
+        
+        .speaker-details .title-company {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .talk-abstract {
+            color: #4b5563;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .speaker-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        
+        .speaker-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .speaker-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .qr-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .qr-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 1rem auto;
+        }
+        
+        .btn-qr {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-qr:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+        
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section .lead {
+                font-size: 1.1rem;
+            }
+            
+            .talk-card {
+                padding: 1rem;
+            }
+            
+            .speaker-info {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            
+            .speaker-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .day-header {
+                padding: 1rem;
+            }
+            
+            .day-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>Tech Conference 2024</h1>
+            <p class="lead">Innovation Booth</p>
+        </div>
+    </div>
+    
+    <!-- Info Section -->
+    <div class="info-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-map-marker-alt fa-2x text-primary mb-2"></i>
+                    <h5>Location</h5>
+                    <p class="text-muted">Hall A, Booth 123</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                    <h5>Duration</h5>
+                    <p class="text-muted">15-20 minute talks</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                    <h5>Format</h5>
+                    <p class="text-muted">Interactive booth presentations</p>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="lead">Join us for exciting 15-20 minute talks covering the latest in technology!</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- Schedule Content -->
+    <div class="container">
+        
+        <div class="day-section">
+            <div class="day-header">
+                <h2>Day 1 - Friday</h2>
+                <div class="date">Friday, March 15, 2024</div>
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="talk-card">
+                        <div class="mb-3">
+                            <span class="talk-time">09:00 am</span>
+                            <span class="talk-duration">20 min</span>
+                        </div>
+                        
+                        <h3 class="talk-title">Introduction to AI/ML in Production</h3>
+                        
+                        <div class="speaker-info">
+                            
+                            <img src="https://via.placeholder.com/150x150/4CAF50/white?text=SJ" alt="Sarah Johnson" class="speaker-avatar">
+                            
+                            <div class="speaker-details">
+                                <h4>Sarah Johnson</h4>
+                                <div class="title-company">
+                                    Senior ML Engineer at TechCorp
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <p class="talk-abstract">Learn how to deploy machine learning models in production environments with confidence. We'll cover best practices, monitoring, and scaling strategies.</p>
+                        
+                        
+                        
+                        <div class="speaker-links">
+                            
+                            <a href="https://linkedin.com/in/sarahjohnson" target="_blank" class="speaker-link">
+                                
+                                <i class="fab fa-linkedin"></i>
+                                
+                                LinkedIn
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAChklEQVR4nO2bTWrkMBSEq0aGXto3yFGkG8yRhrmZfZQcICAtByRqFpJ/enpCEnAbOzwtRGJ/iwIjPVU9NYWvjOnHl3DAeOONN954441/j2cbHRhQyJBIhtQBSPO7cKAe4/fiIUmClyRFJwBt0ggn+Oi0Qcaz6Tf+c3xqK1SKhfARAFAIACDZHa3H+H347vGRy0AqFPq3TkjH6jH+uTw5FGIanOBfb4/m+Oz6jf8/30saAcAr14kcAAYAkvLReozflZ9IkgMApJvq0XkpwiTJY/UYvxNf6+/dPly4nfr7Pfps+o3/YFTzsxqijTWqL7Ds2eaPrsprRCF/KaMW4bp0EylFLM+O02P8Xnzdnwm4jIku06tQXmWxRi5jCk48Ro/x+/J1f9bYZwB9hsa+/dvirF51atzZ9Bv/wWjhY1zq7/Kl24u7CNO+78X45fycUbdmAKIfC+jHsqRby19n02/8Z3iGRAKpa1nzNE/z0crpjn+2HuOfwtcQa+4v+Agw9BkMWA7Rp9Zv/MNo+/P0kjtNdLmdpAeXiV4g0lDTD/rxCD3GP4X3rx3a+bk+aP63UcnyyYvyG/9LgBDQ/C8AQNOL0FbyIXqM35dv/lcRaDY3OlUTLDU73G53mD+6IL/kz2iBhldGTTX82hWc7bB932vy7SP3Ga21HwuBtcmQbmI4UI/x+/Lr/cl6vprYQb/ZAUgdtiv5nPqNf3f8e3+y9gIj5klWf6/Mb2LmNYSe+79r/bX8+dvwfQaA+ZJd7R8lux/7TfiaRNelm+Zy7PXH8o1r8vPC7AVsGvo/31oqCXRZ0xCtv3Bpfr0/6WMhA5wY6v26VoQZjtRj/E487ffdxhtvvPHGG384/xca3KFKu5xAVwAAAABJRU5ErkJggg==', 'LinkedIn', 'https://linkedin.com/in/sarahjohnson')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                            <a href="https://github.com/sarahjohnson" target="_blank" class="speaker-link">
+                                
+                                <i class="fab fa-github"></i>
+                                
+                                GitHub
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB8UlEQVR4nO2bQY6cMBBFXwWkWRppDtBHgZu1cjN8lDlAJLNsCfSzMG6YyQYSwRB11cJqN2/xJeubX7YwsbHij60kOOqoo4466uiRqM1VA8MylL+7wwU4ugdtJUkJiM38xDoqSZI+o8cIcHQPOjwtxPT8BbPfThDg6Iaqv8yNkCA22EkCHP0XtE2TQdCffdj1tL4cWrwVBAygaJUM6hGA9Zp9u1ZHZzSamVkDdk9AmwCYciQ8Q4CjWyp7a7GQ4GFimEyfnXUBrY6WfqshG4zYlOny4HgBjm6r3FL1VFqyhaQxD2vk27U6WtAwIn3U0KZKa0eFEetOEODoltJSfZiHkjJgnrq3roRaB8yng0DeE9sEy7pdRusro2V9hvcRwi+jTVMtmGrF21gDU60jBTj6d+8t2o83qR/eSnAf6pwJrTtBgKM70XgbMbs9cjts9wTrxbuU1tdEnzthgxgM2n6aT3RjA9amd3wnvBa6RD8YaqRUlWkYzxDg6A50dXccb88Gq0TEeXoRrY6u7o5zZA8PK7aaTP3xAhzdg5a7Y/20GmIezNY92GW0OvqsNkF2GVRS7ydP10YrWRekfKobzRP89dAgqWc5gzKzjsnsLs+E10Hnt1LMLVbFnC2CsGiViE06VoCjO1DzrxYcddRRRx39j9DfoCHesbz+Pc0AAAAASUVORK5CYII=', 'GitHub', 'https://github.com/sarahjohnson')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                            <a href="https://sarahjohnson.dev" target="_blank" class="speaker-link">
+                                
+                                <i class="fas fa-blog"></i>
+                                
+                                Blog
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB70lEQVR4nO2bTYrcMBBGX0WGLGXIAeYo9s3mTLlB6yhzgIC1HFDzZSGp2zMDoZ3gtgNVC2Pkt/igKNVft4kHLX17lARHHXXUUUcd3RO1ZgMkMyONALkfz7sLcHQLOkmSFmBSweZ6GiRJ+ojuI8DRLWjuIZRsQHobsBmo8fYMAY7+BWqvC5Be3u0gAY7+wYavR6EYMeiLuw7X6mj3VhSQQWkMKM1DERnWvfPhWh1lXUcQxLTcH/14kqTL4VodrbF1DyGll0I/+ziVOlyro73fGmmtFnmg9Vu3D/sLcPQxazdhLO1tWoJ0qR/KCvGb8ARod0VUTVS6xOajlrdi8bx1GvQWUQCxDTR6WIXuRvfWOdAeW4C0BFHnTb0wbL50b50DXWUrph5R9f5ruax43jodGksdEQKgS+7DQhvB5icIcHQDms0gtj7ZXhewORZ0yd99Bn8a9HPd3l0Wmo9uyctvwhOgLSndjPtWa7oVGO6tU6Gr3TGx9AlGbmnM5t0FOLoFXe2O38yk5WqtMHySAEcfsb4xySNMP0FkqKutZAD5R9GeAhz9N7RvTNos491/RXNetI3fr1ab5WRewZ8H/bw7tklXEzkUq7fjfcd1uFZHm7dqjiJAGn/RC4xQSOOyrwBHN6Dm/1pw1FFHHXX0P0J/Aw4DOZ6N0Ng2AAAAAElFTkSuQmCC', 'Blog', 'https://sarahjohnson.dev')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="talk-card">
+                        <div class="mb-3">
+                            <span class="talk-time">09:30 am</span>
+                            <span class="talk-duration">15 min</span>
+                        </div>
+                        
+                        <h3 class="talk-title">Cloud Security Fundamentals</h3>
+                        
+                        <div class="speaker-info">
+                            
+                            <img src="https://via.placeholder.com/150x150/2196F3/white?text=MC" alt="Mike Chen" class="speaker-avatar">
+                            
+                            <div class="speaker-details">
+                                <h4>Mike Chen</h4>
+                                <div class="title-company">
+                                    Security Architect at SecureCloud Inc
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <p class="talk-abstract">Essential security practices for cloud infrastructure. Discover common vulnerabilities and how to protect your applications.</p>
+                        
+                        
+                        
+                        <div class="speaker-links">
+                            
+                            <a href="https://linkedin.com/in/mikechen" target="_blank" class="speaker-link">
+                                
+                                <i class="fab fa-linkedin"></i>
+                                
+                                LinkedIn
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB+0lEQVR4nO2bTYqkQBCFvxiFWqbQB+ijZN6smSP1Dcyj1AEGdFmQ8maRalfPD5QNWg4TsRBMv8WDIDOeEWriwcjfHiXBUUcdddRRR/dEbY4WS2ML2VpgXJbT7gIc3YJGSdIA6kOBOADQSJL0Gd1HgKNb0HHZQtnMzLp52czaYwQ4+iU0SBBuy/l3vABH/xrtnxaV00UwHiHA0S+gQVIPEIfJALAESCrHCHD0cXStVpbGi+xtAGCqlvAIAY4+EvUk/KX9pPx6Mwifl5+u1VFmj159+2LZ49Do/laS+qdrdbRmS32QiCqoh/mylqwZebpWR5dU0Gi+HdZEVS/ve+tsqKVQgFCwRCNL40XEqxmM7jLOg64uY2qVU4ty19w9FoDtKcDR7S6j9glrlHocErXUMq9bJ0FXT6g7E1izVesW4HXrZGi8tix1CywFSRom+7Af59H6H6NLnzAUlK0pytYUcvejPrA4dKY9BTi63cGvATTr65dEHPx962zox+xYPZPB2DJfgmRpdwGObkHX2XFtOhFuVrtRRwlwdAu6zI7Nusns7drWvvxxAhx9IH6bRsb3DuUOgKZuLncZZ0X1vYN5OBkK/s3TqdDVwQsYwaJYv3maWuJ7t68AR7dnK9cK1QDjS7H4/lIsDoj8Ku8TngY1/2vBUUcdddTRfwj9Cex/MJl5uCLsAAAAAElFTkSuQmCC', 'LinkedIn', 'https://linkedin.com/in/mikechen')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                            <a href="https://twitter.com/mikechen_sec" target="_blank" class="speaker-link">
+                                
+                                <i class="fab fa-twitter"></i>
+                                
+                                Twitter
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB6klEQVR4nO2bTYrcMBCF34sFs5QhB5ijyDfIkXI16Sh9gIC1bJB5WUh2e2aycAfcVkjVSj/f4kFRUqnKpnDQ0rejJGCooYYaaqihZ6Js5kCOAJAdgLwuT6cLMPQZNEiSZkARAOALOGGQJOkjeo4AQ59B8xZCWIhEV8fkOupIq6GfzJeLBRj6BJrd17Vetf5H6OoVLwAZQJgXMMzf6/L+7Xy5VkMbmkiSI8Apv20uWmpK+AoBhh6xGlsfyk8Lld7vbPF2tgBDn0DRcnRfgDAPklRqQr9OpZrfx8u1Glq9pbi9rcK8f3Ttkcu1GrqivgDIDoq+1Kl0exPgJU4vEGDoEXtEVDsOVSDNaKMIwE7CXtDdvVV9BGBzmd1bnaGbt6Tmo11sPdbMW12gO2/tgmm3AdhJ2BsabiTg7+SUXQurRFIRg9Xgu0G3euBQCABK4wCk8VfdYJhH6kwBhv5NLaPUgkZz2Y9BDLFNTxVg6NPoo3es6O9ce8cO9t7qEd16x0B24OTv/NLk6kWroVvvmJOXEG6u1uVfJ8DQA/aHruPilMahEBhqcFmW0SuquLaNJRXYN09dol5SBMCfM4AwLwQy2QqILxBg6AFrgZTqDTUA8MUxRKGehOldaxp/uVZDaX8tGGqooYYa+g+hvwGAOhub/sxBBwAAAABJRU5ErkJggg==', 'Twitter', 'https://twitter.com/mikechen_sec')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="talk-card">
+                        <div class="mb-3">
+                            <span class="talk-time">10:00 am</span>
+                            <span class="talk-duration">20 min</span>
+                        </div>
+                        
+                        <h3 class="talk-title">Modern Frontend Frameworks Compared</h3>
+                        
+                        <div class="speaker-info">
+                            
+                            <img src="https://via.placeholder.com/150x150/FF9800/white?text=AR" alt="Alex Rivera & Jamie Park" class="speaker-avatar">
+                            
+                            <div class="speaker-details">
+                                <h4>Alex Rivera & Jamie Park</h4>
+                                <div class="title-company">
+                                    Frontend Developers at WebDev Solutions
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <p class="talk-abstract">A comprehensive comparison of React, Vue, and Angular in 2024. Which framework should you choose for your next project?</p>
+                        
+                        
+                        
+                        <div class="speaker-links">
+                            
+                            <a href="https://alexrivera.dev" target="_blank" class="speaker-link">
+                                
+                                <i class="fas fa-link"></i>
+                                
+                                Portfolio
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB6UlEQVR4nO2ZQW6kMBBFX43Z09IcIEeBG8yRRnOz5ihzA3sZCfSzsA1ErYzojCCWUrUAbL3Fl76KqrJNHIzpx1ESHHXUUUcddfRM1Ep02AgwmZmNqW6Ppwtw9FB0+TXcAdJPgKUDwgwpzADYmQIc/QSaagpNtyCGCDYCZtZdI8DRA9E97KRuZnp5NZGuEODof6C6Awx/awW7XICj/4iaW72AVGqUQOvXyQIcfR6dzMzsBqVkpQ5gyS3hFQIcPRI5t7YUEmkxwavpfWY1oNXROm/dtv4vyEaCgMXK5HW6AEePhSRJd4Kgn9clMEjv9r5cq6PZCoYIUgzZNymSK1hZulttoDVx+vKAXmJY9xTx3GoGLblFLwFBDJrrHuv45W61ge6dKV+htIKDtDPP3WoALVbskqmfS8mSZsDrVkNodStCrlul3wAGbb65W02ga92aYYhB2/+vhudWO+juT7j1GyXLVLtDd6spdLs7zk0gqauPawQ4eizKdJyLV9jNW+UsA7yDbw5d745hMf2xLp/LXyfA0U+guhNkv2NdKn6IniPA0efQxZhui+UWcXqZay1rUes3Qx/vjnvQ9CvCdMN2xNdrdXR38kQ5J1zvSeJ6Gu9dRhvo491xeZSJOSfdiQIcddRRRx119An0DT8db7/9+GisAAAAAElFTkSuQmCC', 'Portfolio', 'https://alexrivera.dev')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                            <a href="https://github.com/alexrivera" target="_blank" class="speaker-link">
+                                
+                                <i class="fab fa-github"></i>
+                                
+                                GitHub
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAAB/0lEQVR4nO2bwW3jMBBF36wE5CgDW4BLoTrYkoKUlA6kUtIBeTRA4e+BpK14LwoCy1pk5mKDfIcPEDOc+bRNbIz511YSHHXUUUcddfSRqNXosTGZ2Zh6ILXl8eECHN0WkiSCJCl20kQnTYNEiJ1Wu9PTtTra1890gvAOhPgbgz6LBAZdfqgAR7+FDhlgafVvfwGObkfnE2ii+3cOO57WH4e2SjgISED4sLIiEqzP7OlaHa3obGZmJ7CRToQINrKUlnAPAY5uiZJbn8reYszni+lu+flaHa0dPEOmtOwTnaQI3sEfD23zVmxTFkNGiiAprxA/rQOgLbdWGUU9rWnI1DnZT+tY6HAx5nNGb6e2FT6q/bSLAEe3RClzirUTrDdYqY6ffCnPreej1y5D5d4q9a9WQomg7PfWYdBVT9gcjJuN0b55bh0LDbGTvepiUlys9RuLrT2oo2j9wejqZqIkU+kEm/F+vbw8tw6Ati6jxd1M7Kd1QPT2dqy388WYTwCpBwbJxocLcPQraH07BkgvspHFbi9dewhw9Ctoqj+/sNe4WBmM52a/a9pBgKMbor9fmM+513zOPddHfgvT4wQ4+o3TEqnHwseLmP9EbLX1dK2OXn1CSRNgYzHiLwYsVt2oHQQ4uiWaBw/c5q2bL+8e/JFQ838tOOqoo446+h+hfwFQ+GuMQXB9FwAAAABJRU5ErkJggg==', 'GitHub', 'https://github.com/alexrivera')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="day-section">
+            <div class="day-header">
+                <h2>Day 2 - Saturday</h2>
+                <div class="date">Saturday, March 16, 2024</div>
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="talk-card">
+                        <div class="mb-3">
+                            <span class="talk-time">09:00 am</span>
+                            <span class="talk-duration">15 min</span>
+                        </div>
+                        
+                        <h3 class="talk-title">Database Optimization Tricks</h3>
+                        
+                        <div class="speaker-info">
+                            
+                            <img src="https://via.placeholder.com/150x150/9C27B0/white?text=LW" alt="Dr. Lisa Wong" class="speaker-avatar">
+                            
+                            <div class="speaker-details">
+                                <h4>Dr. Lisa Wong</h4>
+                                <div class="title-company">
+                                    Database Consultant at DataExperts LLC
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <p class="talk-abstract">Simple yet powerful techniques to optimize your database queries and improve application performance by 10x.</p>
+                        
+                        
+                        
+                        <div class="speaker-links">
+                            
+                            <a href="https://linkedin.com/in/drlisaw" target="_blank" class="speaker-link">
+                                
+                                <i class="fab fa-linkedin"></i>
+                                
+                                LinkedIn
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAACA0lEQVR4nO2bS4qkUBBFz22FHL6EXkAt5bmDXlLSS+od6FJyAQU6LFBuD57mp0ZmNVo2RAzEzxlcCOJjhMqstO7HWhICDTTQQAMNdEtUs9XQ3Q4My+1mcwGBvoJm23YPZI9AGgEq27af0W0EBPoKOiwh1EnS5VqjBijxtoeAQFdY/elapB66tw/tJCDQf/AWDMJQGYY9BAT6BTTZbgG3xVGzF22P+wgIdI099hFUJvf3w3I723b77VoDLTF0Hz95zn+TID1Ppb5da6BLbN0z4afmPXm2iK3DoPlaA2lEzVDjlkmUABukZ3QbAYGusjlwqEyJqFvJKtUqjVG3DoOyJLpxSYLJxWVuoVyGtw6GdufKMJxKX6EG0KWHMo3aQUCga6z0hMo9KHuSu19T7TLLSGMNTLW3FBDoV2YZU+1OxW8W1Lg7vyPSO8rtdgICfb2Dz31VuvUyfs/3WkYVdesw6OOcMP8RZjiZbunalfufRCY8CnqbZYwYjHL7IZP6kv80b7q2ExDoy+jD7pihRs0wn5WnzeYCAn0Fve+Ouzfb7ictC+RJ85vXUbQGetsduwWkM2WLfA+wA2kN9Gb5qiWYqMrkSc2eAgJ9BU1eJoYeodMpvqI5HLpsTNQMEtkjapikS+yOj4d2kkq1ItlzT0hl/z7vIyDQNab4ayHQQAMNNND/CP0LNoMcbEXkSp8AAAAASUVORK5CYII=', 'LinkedIn', 'https://linkedin.com/in/drlisaw')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                            <a href="https://scholar.google.com/lisawong" target="_blank" class="speaker-link">
+                                
+                                <i class="fas fa-link"></i>
+                                
+                                Research
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACe0lEQVR4nO2aQYrcMBBFX8WGWaohB+ij2DfImXIz6yhzgIC9HFDzs5DktnvIJAMe0wqlRWO33+LDp0pVJZn4zIrfPoWD884777zzzjv/J97K6vMT0cxg6bFxqd/GE/U4fzA/SJJmkJSwESBe30wTnSRJe/6r9Th/ML/UCI0X0EQnhtceGwEz68/W4/wxfP/4x/DawzBfDIKws/U4fyz/zl8AI6RecTTEcq4e57+GD5ImgHhNaFpexDB3edeVlM7W4/wxPNviia64uv2p3wZJmp5Nv/Mfr5yfN0PKeE0AN4PwZtp9O0GP88fyNX5DgmHupCms4Rwkaa79kcdvi/wmP2sKiWLoDJqoW+8wF879bY2vvq1bL0HaGFrsLkHs/rbGl/jNZVRQXXMJ503O9vzcIs/d0By1E10N511qdn+b5HP9bMOUekHqLb/qZkTrBAu7Idaz6Xf+L+thm61V832qsXbCHr/N8mbXt9LwTkuP2aV8zkX0dLYe54/i1/63FNHZy+G+JyuhaS28PH4b4zf1833SISmR/X1ol9zfxvh38yvtThVKTHt/1Cr/OL/aPA218AJ8vtEov8vK9cAoTyo3k2g8PzfN19YoAUGyEYClz0GcN+Ez9Th/FF/mG+WtS4oGij/ACL8Mlu9pyz+bfuf/ib83RISEjXTK8VsKr5vt+a/W4/xB/PZ8Yb2QU1y938pZyy3ff1vns41LD9Fe1uOkzvff/4PXTzOzMdT5RrzczMbFPD+3ydf7sUHcz4oEN2yYajscL12yc/Q4fyxf/I3Zvg6gS7BcAG490GOEuV6zezb9zn+8Hu9PlqcggE7v+GfT77zzzjvvvPMt8r8BcVX+j0HM7xYAAAAASUVORK5CYII=', 'Research', 'https://scholar.google.com/lisawong')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="talk-card">
+                        <div class="mb-3">
+                            <span class="talk-time">09:30 am</span>
+                            <span class="talk-duration">20 min</span>
+                        </div>
+                        
+                        <h3 class="talk-title">DevOps Pipeline Best Practices</h3>
+                        
+                        <div class="speaker-info">
+                            
+                            <img src="https://via.placeholder.com/150x150/607D8B/white?text=CM" alt="Carlos Martinez" class="speaker-avatar">
+                            
+                            <div class="speaker-details">
+                                <h4>Carlos Martinez</h4>
+                                <div class="title-company">
+                                    DevOps Engineer at AutoDeploy Co
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <p class="talk-abstract">Build robust CI/CD pipelines that scale. Learn from real-world examples and common pitfalls to avoid.</p>
+                        
+                        
+                        
+                        <div class="speaker-links">
+                            
+                            <a href="https://github.com/carlosmartinez" target="_blank" class="speaker-link">
+                                
+                                <i class="fab fa-github"></i>
+                                
+                                GitHub
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACZklEQVR4nO2bQYrkMAxFn8YFs3SgDzBHca7cN0hulCwbXPxZ2E7SBU13M5lMeZAXoYzfQvCRLMkqE99Z849v4eC8884777zzzn/EW103YG2f2cxgbWfjhfY4fzKfJEkLmA0AMWMjQUCQJOk9/7ftcf5kfm0empTLVhN3A6A69qX2OH8Of3vYax4WjCgsLQOWXq+1x/lz+Ud9DW6ZNIHmIWRYr7XH+XP5pm8URcv0+gJwvwF3E8CxBfJs9jv/JX42s5paAbD+FGkJspF7SZ+vtcf5k/jiv++alHfT/OvNmIeAHs6ezn7nP1m1+IkZaQFJGdIStNdMpKVymp7Nfuc/WVW3mCkib7+AUIK0pqgqt+vbGV/11VK1rPUvoAko0u6c69sZX+NzWoKa1wJEaQ/SHp/75dv9S1Bx2HIJL1BELgcx4/G5S37Lr1qSNcVcQnON1FHH5fp2xre4Wzah3rUTQS1IN9D9t0f+kD/X0kh50zwc4rP7b5f8MT6nJdRMumRapSqqwru+XfKtPtoU3NKtkjpDK5I8PvfIb/VRS50nYPfkljp7/twpv/Wf883SJCAuWGlCjwEjXmuP8+fyRV8rD74WssEtC4Ql3a2NY734fE6f/OHWrZFamZpkAXv/yuNzx/xhfnIeQut0EFT9d+t5PKn9zn+4mtfWR4b9U1136156fdQzv81PAtgY34x5oA5BJ2Xq6bPa7/zXeBvLVGyQptWsXL2zmXl8/i/41pWEQxMLgmz8J/Y4/2f84/1bX4Jhm+TYm5R+//bHb++/wPH96Di6UaezXN8OefP/dzvvvPPOO+/85fxvEBoLqhGYi9kAAAAASUVORK5CYII=', 'GitHub', 'https://github.com/carlosmartinez')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                            <a href="https://devopsblog.carlosmartinez.dev" target="_blank" class="speaker-link">
+                                
+                                <i class="fas fa-blog"></i>
+                                
+                                Blog
+                            </a>
+                            
+                            <button class="btn-qr" onclick="showQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACfUlEQVR4nO2bQYrjMBBFX40CvZShD9BHsW8wR2r6SHMD6yh9gIC9DNj8WUiKkwzTTBjHHUNpISz7LT4UVaoqySbuGenHXTg477zzzjvvvPN/462MA9YBpGbOSxjrt25DPc6vzLeSpAGA2ex9CKLVyawjSJJ0zT9aj/Mr82P10NQEAbPpowH1QPHkTfU4/yh+LLa0988XWfftepxfk1cPZCOn5rz8Pj3O/x9fA28UMIIBCATp59FUlpvpcX5dnsvkiSDa4Waq31pJ6p9Nv/Nfj+y/i4eKcTalt5MpNaF48oZ6nH8Eb9YsaXKQdQRBPJl1zEby+nevfI7P6rNBpRKGgYsnluWz6Xf+63EubGdT6gwlCxOt5vzBIEzW9iXxej79zv8Tn9OoKEGcsG58kT7MLPtvambbVo/zK/ElPmuAMmnKVa/6OAFRyu/k8XmHfKmP2mpBcpGUjRx8/907f/bfUuteNawW+wa5fXfJ17hbY3Excqw9j3ywpMn9d598jcrVtEuStTz5/rtf/mzfakEt9e/Sn4zuvzvlb/NnyAf60zlIh7o7u313zEeJ9FZ2XevGcjWnRuqT17/75K/aVJ8GxKMpNWGCeDzAaEAc5P2rXfKXu26uhIdS/9ap9KQ9Pu+SP/svAGFSajCSnYHxdSJZmDbS4/xD+LYmWdbFklrpo4GaOk83/KP1OL8SX8+PxgbaXwAEGXE+5FQrGZCaY1k+nX7n7+PVj4c82fsQlD1ZQ6g3KZ9dv/PX43D7oh1eodV8UN6EI5C6zfQ4/xg+lq6VdZT617rcs5xrEbypHufX4f+4P0lczn/LweFF99Lro53x5v93O++888477/zm/G/pNcswCMzAEAAAAABJRU5ErkJggg==', 'Blog', 'https://devopsblog.carlosmartinez.dev')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- QR Code Modal -->
+    <div class="qr-modal" id="qrModal" onclick="hideQR()">
+        <div class="qr-content" onclick="event.stopPropagation()">
+            <h4 id="qrTitle">QR Code</h4>
+            <img id="qrImage" class="qr-code" src="" alt="QR Code">
+            <p id="qrUrl" class="text-muted small"></p>
+            <button class="btn btn-secondary btn-sm" onclick="hideQR()">Close</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 Tech Conference 2024. Schedule generated with ❤️ using Python.</p>
+            <p class="small text-muted">Last updated: <span id="lastUpdated"></span></p>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Set last updated time
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+        
+        // QR Code modal functionality
+        function showQR(qrData, linkName, url) {
+            document.getElementById('qrTitle').textContent = linkName + ' - QR Code';
+            document.getElementById('qrImage').src = qrData;
+            document.getElementById('qrUrl').textContent = url;
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+        
+        function hideQR() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+        
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideQR();
+            }
+        });
+        
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

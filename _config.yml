@@ -1,0 +1,34 @@
+# GitHub Pages / Jekyll Configuration
+# This file helps GitHub Pages understand our site structure
+
+title: "Conference Booth Scheduler"
+description: "A beautiful, responsive conference booth scheduling system"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - venv/
+  - requirements.txt
+  - generate_site.py
+  - run_local.py
+  - templates/
+  - schedule.yaml
+  - README.md
+  - .gitignore
+
+# Include in processing (ensure docs content is served)
+include:
+  - docs/
+
+# GitHub Pages specific
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Collections
+collections_dir: docs 

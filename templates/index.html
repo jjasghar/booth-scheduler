@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.conference.name }} - {{ data.conference.booth_name }}</title>
+    
+    <!-- Bootstrap CSS for responsive design -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #f59e0b;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #ffffff;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-section .lead {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+        
+        .info-section {
+            background-color: var(--light-color);
+            padding: 2rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .day-section {
+            margin: 3rem 0;
+        }
+        
+        .day-header {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #f59e0b 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .day-header h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .day-header .date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .talk-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .talk-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.15);
+        }
+        
+        .talk-time {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .talk-duration {
+            background: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .talk-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.75rem;
+        }
+        
+        .speaker-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .speaker-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-color);
+        }
+        
+        .speaker-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--dark-color);
+        }
+        
+        .speaker-details .title-company {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .talk-abstract {
+            color: #4b5563;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .speaker-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        
+        .speaker-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .speaker-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .qr-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .qr-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 1rem auto;
+        }
+        
+        .btn-qr {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-qr:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+        
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section .lead {
+                font-size: 1.1rem;
+            }
+            
+            .talk-card {
+                padding: 1rem;
+            }
+            
+            .speaker-info {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            
+            .speaker-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .day-header {
+                padding: 1rem;
+            }
+            
+            .day-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>{{ data.conference.name }}</h1>
+            <p class="lead">{{ data.conference.booth_name }}</p>
+        </div>
+    </div>
+    
+    <!-- Info Section -->
+    <div class="info-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-map-marker-alt fa-2x text-primary mb-2"></i>
+                    <h5>Location</h5>
+                    <p class="text-muted">{{ data.conference.location }}</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                    <h5>Duration</h5>
+                    <p class="text-muted">15-20 minute talks</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                    <h5>Format</h5>
+                    <p class="text-muted">Interactive booth presentations</p>
+                </div>
+            </div>
+            {% if data.conference.description %}
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="lead">{{ data.conference.description }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Schedule Content -->
+    <div class="container">
+        {% for day in data.days %}
+        <div class="day-section">
+            <div class="day-header">
+                <h2>{{ day.day_name }}</h2>
+                <div class="date">{{ day.date | format_date }}</div>
+            </div>
+            
+            <div class="row">
+                {% for talk in day.talks %}
+                <div class="col-lg-6 mb-4">
+                    <div class="talk-card">
+                        <div class="mb-3">
+                            <span class="talk-time">{{ talk.time | format_time }}</span>
+                            <span class="talk-duration">{{ talk.duration }}</span>
+                        </div>
+                        
+                        <h3 class="talk-title">{{ talk.title }}</h3>
+                        
+                        <div class="speaker-info">
+                            {% if talk.speaker_image %}
+                            <img src="{{ talk.speaker_image }}" alt="{{ talk.presenter }}" class="speaker-avatar">
+                            {% endif %}
+                            <div class="speaker-details">
+                                <h4>{{ talk.presenter }}</h4>
+                                <div class="title-company">
+                                    {{ talk.presenter_title }}{% if talk.company %} at {{ talk.company }}{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if talk.abstract %}
+                        <p class="talk-abstract">{{ talk.abstract }}</p>
+                        {% endif %}
+                        
+                        {% if talk.speaker_links %}
+                        <div class="speaker-links">
+                            {% for link in talk.speaker_links %}
+                            <a href="{{ link.url }}" target="_blank" class="speaker-link">
+                                {% if link.name == 'LinkedIn' %}
+                                <i class="fab fa-linkedin"></i>
+                                {% elif link.name == 'GitHub' %}
+                                <i class="fab fa-github"></i>
+                                {% elif link.name == 'Twitter' %}
+                                <i class="fab fa-twitter"></i>
+                                {% elif link.name == 'Blog' %}
+                                <i class="fas fa-blog"></i>
+                                {% else %}
+                                <i class="fas fa-link"></i>
+                                {% endif %}
+                                {{ link.name }}
+                            </a>
+                            {% if link.qr_code %}
+                            <button class="btn-qr" onclick="showQR('{{ link.qr_code }}', '{{ link.name }}', '{{ link.url }}')">
+                                <i class="fas fa-qrcode"></i> QR
+                            </button>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- QR Code Modal -->
+    <div class="qr-modal" id="qrModal" onclick="hideQR()">
+        <div class="qr-content" onclick="event.stopPropagation()">
+            <h4 id="qrTitle">QR Code</h4>
+            <img id="qrImage" class="qr-code" src="" alt="QR Code">
+            <p id="qrUrl" class="text-muted small"></p>
+            <button class="btn btn-secondary btn-sm" onclick="hideQR()">Close</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 {{ data.conference.name }}. Schedule generated with ❤️ using Python.</p>
+            <p class="small text-muted">Last updated: <span id="lastUpdated"></span></p>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Set last updated time
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+        
+        // QR Code modal functionality
+        function showQR(qrData, linkName, url) {
+            document.getElementById('qrTitle').textContent = linkName + ' - QR Code';
+            document.getElementById('qrImage').src = qrData;
+            document.getElementById('qrUrl').textContent = url;
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+        
+        function hideQR() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+        
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideQR();
+            }
+        });
+        
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
