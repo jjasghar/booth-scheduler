@@ -258,6 +258,79 @@
             transform: translateY(-1px);
         }
         
+        .day-navigation {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--ibm-gray-10);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .day-nav-title {
+            color: var(--ibm-blue);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+        
+        .day-nav-title i {
+            margin-right: 0.5rem;
+        }
+        
+        .day-nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .day-nav-btn {
+            background: white;
+            border: 2px solid var(--ibm-blue);
+            color: var(--ibm-blue);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 160px;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        
+        .day-nav-btn:hover {
+            background: var(--ibm-blue);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+        }
+        
+        .day-nav-btn.active {
+            background: var(--ibm-blue);
+            color: white;
+            box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+        }
+        
+        .day-nav-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .day-nav-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .day-nav-count {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
         .footer {
             background: var(--dark-color);
             color: white;
@@ -291,6 +364,18 @@
             }
         }
         
+        @media (max-width: 768px) {
+            .day-nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .day-nav-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
         @media (max-width: 576px) {
             .hero-section {
                 padding: 2rem 0;
@@ -302,6 +387,15 @@
             
             .day-header h2 {
                 font-size: 1.5rem;
+            }
+            
+            .day-navigation {
+                padding: 1rem 0;
+            }
+            
+            .day-nav-title {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
             }
         }
     </style>
@@ -315,6 +409,35 @@
         </div>
     </div>
     
+    <!-- Day Navigation -->
+    <div class="day-navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="day-nav-title">
+                        <i class="fas fa-calendar-alt"></i>
+                        Select Conference Day
+                    </h4>
+                    <div class="day-nav-buttons">
+                        
+                        <button class="day-nav-btn" onclick="scrollToDay('day-1')" data-day="day-1">
+                            <div class="day-nav-date">Friday, March 15, 2024</div>
+                            <div class="day-nav-name">Day 1 - Friday</div>
+                            <div class="day-nav-count">3 talks</div>
+                        </button>
+                        
+                        <button class="day-nav-btn" onclick="scrollToDay('day-2')" data-day="day-2">
+                            <div class="day-nav-date">Saturday, March 16, 2024</div>
+                            <div class="day-nav-name">Day 2 - Saturday</div>
+                            <div class="day-nav-count">2 talks</div>
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Info Section -->
     <div class="info-section">
         <div class="container">
@@ -348,7 +471,7 @@
     <!-- Schedule Content -->
     <div class="container">
         
-        <div class="day-section">
+        <div class="day-section" id="day-1">
             <div class="day-header">
                 <h2>Day 1 - Friday</h2>
                 <div class="date">Friday, March 15, 2024</div>
@@ -542,7 +665,7 @@
             </div>
         </div>
         
-        <div class="day-section">
+        <div class="day-section" id="day-2">
             <div class="day-header">
                 <h2>Day 2 - Saturday</h2>
                 <div class="date">Saturday, March 16, 2024</div>
@@ -694,6 +817,61 @@
         // Set last updated time
         document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
         
+        // Day navigation functionality
+        function scrollToDay(dayId) {
+            const element = document.getElementById(dayId);
+            if (element) {
+                // Calculate offset for sticky navigation
+                const navHeight = document.querySelector('.day-navigation').offsetHeight;
+                const elementPosition = element.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active button
+                updateActiveButton(dayId);
+            }
+        }
+        
+        function updateActiveButton(activeDayId) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.day-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            const activeBtn = document.querySelector(`[data-day="${activeDayId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+        
+        // Update active button based on scroll position
+        function updateActiveButtonOnScroll() {
+            const sections = document.querySelectorAll('.day-section');
+            const navHeight = document.querySelector('.day-navigation').offsetHeight;
+            const scrollPos = window.scrollY + navHeight + 50;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    updateActiveButton(section.id);
+                }
+            });
+        }
+        
+        // Add scroll listener
+        window.addEventListener('scroll', updateActiveButtonOnScroll);
+        
+        // Set initial active button
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActiveButtonOnScroll();
+        });
+
         // QR Code modal functionality
         function showQR(qrData, linkName, url) {
             document.getElementById('qrTitle').textContent = linkName + ' - QR Code';
