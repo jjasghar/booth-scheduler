@@ -1,15 +1,18 @@
 # 🎤 Booth Scheduler
 
-A beautiful, responsive conference booth scheduling system that automatically generates a static website from a simple YAML file. Perfect for tech conferences, meetups, and events!
+A beautiful, responsive conference booth scheduling system that automatically generates a static website from CSV and YAML files. Perfect for tech conferences, meetups, and events!
 
 ## ✨ Features
 
 - 📱 **Responsive Design**: Looks great on phones, tablets, and laptops
+- 🗓️ **Day Navigation**: Sticky navigation bar to jump between conference days
 - 🔄 **Auto-Deploy**: Changes to schedule automatically update the website
 - 📊 **QR Codes**: Generate QR codes for speaker links on-the-fly
 - 🎨 **Modern UI**: Clean, professional design with smooth animations
 - 🚀 **GitHub Pages**: Free hosting with custom domain support
-- 📝 **Easy Editing**: Update your entire schedule by editing one YAML file
+- 📝 **CSV Editing**: Edit schedule in Excel/Google Sheets (non-technical friendly)
+- 🖼️ **Logo Support**: Add your organization's logo to the header
+- 🔧 **Configurable**: Show/hide features like duration badges and format info
 
 ## 🚀 Quick Start
 
@@ -21,38 +24,37 @@ A beautiful, responsive conference booth scheduling system that automatically ge
    - Scroll to "Pages" section
    - Set source to "GitHub Actions"
 
-### 2. Edit Your Schedule
+### 2. Edit Your Configuration & Schedule
 
-Open `schedule.yaml` and customize it with your conference details:
-
+**Configuration**: Edit `config.yaml` with your conference details:
 ```yaml
 conference:
   name: "Your Conference Name"
   booth_name: "Your Booth Name"
   location: "Hall A, Booth 123"
   description: "Your booth description"
+```
 
-days:
-  - date: "2024-03-15"
-    day_name: "Day 1 - Friday"
-    talks:
-      - time: "09:00"
-        duration: "20 min"
-        title: "Your Talk Title"
-        presenter: "Speaker Name"
-        # ... more details
+**Schedule**: Edit `schedule.csv` with your talks (use Excel/Google Sheets!):
+```csv
+date,day_name,time,duration,title,presenter,presenter_title,company,abstract,speaker_image,speaker_links
+2024-03-15,Day 1,09:00,20 min,Your Talk Title,Speaker Name,Job Title,Company,...
 ```
 
 ### 3. Automatic Deployment
 
-🎉 **That's it!** When you commit changes to `schedule.yaml`, GitHub Actions will automatically:
+🎉 **That's it!** When you commit changes to `config.yaml` or `schedule.csv`, GitHub Actions will automatically:
 - Generate a new version of your website
 - Deploy it to GitHub Pages
 - Your site will be live at: `https://yourusername.github.io/your-repo-name`
 
 ## 📝 Editing Your Schedule
 
-### Conference Information
+### 🎯 **Two-File System**
+- **`config.yaml`** - Conference settings (edit once)
+- **`schedule.csv`** - Talk schedule (edit frequently in Excel/Sheets)
+
+### Conference Information (`config.yaml`)
 
 ```yaml
 conference:
@@ -60,34 +62,36 @@ conference:
   booth_name: "Innovation Booth"         # Your booth name
   location: "Hall A, Booth 123"          # Physical location
   description: "Brief description"       # Optional description
+
+# Website settings
+website:
+  title_suffix: "Schedule"
+  footer_text: "Schedule generated with ❤️ using Python"
+  show_duration_badges: true             # Show duration badges next to times
+  show_format_info: true                 # Show format info section
+
+# Styling options
+branding:
+  primary_color: "#0f62fe"               # Main theme color
+  secondary_color: "#ff6e6e"             # Accent color
+  font_family: "IBM Plex Sans"           # Font family
+  logo_url: "https://example.com/logo.png"  # Optional logo URL
 ```
 
-### Adding Days and Talks
+### Adding Talks (`schedule.csv`)
 
-```yaml
-days:
-  - date: "2024-03-15"                   # Date in YYYY-MM-DD format
-    day_name: "Day 1 - Friday"           # Display name for the day
-    talks:
-      - time: "09:00"                    # Time in HH:MM format (24-hour)
-        duration: "20 min"               # Talk duration
-        title: "Talk Title"              # Presentation title
-        presenter: "John Doe"            # Speaker name(s)
-        presenter_title: "Senior Developer" # Job title
-        company: "Tech Corp"             # Company name
-        abstract: "Talk description..."   # Brief abstract
-        speaker_image: "image-url"       # Speaker photo URL
-        speaker_links:                   # Social/professional links
-          - name: "LinkedIn"
-            url: "https://linkedin.com/in/johndoe"
-          - name: "GitHub"
-            url: "https://github.com/johndoe"
-```
+**🚀 Use Excel, Google Sheets, or any spreadsheet app!**
+
+| date | day_name | time | duration | title | presenter | presenter_title | company | abstract | speaker_image | speaker_links |
+|------|----------|------|----------|-------|-----------|-----------------|---------|----------|---------------|---------------|
+| 2024-03-15 | Day 1 - Friday | 09:00 | 20 min | Talk Title | John Doe | Senior Developer | Tech Corp | Talk description... | image-url | LinkedIn:https://linkedin.com/in/johndoe |
+
+**💡 Pro Tip:** The CSV format is much easier for non-technical users!
 
 ### Speaker Images
 
 You can use:
-- **Placeholder images**: `https://via.placeholder.com/150x150/4CAF50/white?text=JD`
+- **Placeholder images**: `https://via.placeholder.com/150x150/0f62fe/white?text=JD`
 - **Direct image URLs**: `https://example.com/speaker-photo.jpg`
 - **GitHub avatars**: `https://github.com/username.png`
 
@@ -104,39 +108,56 @@ Supported link types (with automatic icons):
 
 ## 🛠️ Customization
 
-### Changing Colors
+### Visual Options (`config.yaml`)
 
-Edit the CSS variables in `templates/index.html`:
+Control what information is displayed:
 
-```css
-:root {
-    --primary-color: #2563eb;    /* Main theme color */
-    --secondary-color: #f59e0b;  /* Accent color */
-    --success-color: #10b981;    /* Success/duration tags */
-    --danger-color: #ef4444;     /* Error states */
-}
+```yaml
+website:
+  show_duration_badges: true     # Show "20 min" badges next to talk times
+  show_format_info: true         # Show the info section with location/duration/format
+
+branding:
+  primary_color: "#0f62fe"       # Main theme color (IBM Blue)
+  secondary_color: "#ff6e6e"     # Accent color
+  logo_url: "your-logo-url"      # Optional: Conference/company logo
 ```
 
-### Adding Custom Styling
+### Logo Setup
 
-Add your custom CSS to the `<style>` section in `templates/index.html`.
+Add your organization's logo:
+- **Direct URLs**: `https://yoursite.com/logo.png`
+- **GitHub avatars**: `https://github.com/yourorg.png`
+- **Placeholder**: `https://via.placeholder.com/120x40/0f62fe/ffffff?text=YOUR+LOGO`
+- **Disable**: Leave empty `logo_url: ""`
 
-### Modifying Layout
+### Advanced Styling
 
-The template uses Bootstrap 5 for responsive design. You can modify the HTML structure in `templates/index.html`.
+For deeper customization, edit `templates/index.html`:
+- Modify CSS variables for colors
+- Add custom styling in the `<style>` section
+- Adjust Bootstrap layout structure
 
 ## 🔧 Local Development
 
 To test changes locally:
 
 ```bash
+# Create virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
 # Install dependencies
 pip install -r requirements.txt
 
 # Generate the site
 python generate_site.py
 
-# Open docs/index.html in your browser
+# Option 1: Open docs/index.html in your browser
+# Option 2: Run local server
+cd docs
+python -m http.server 8000
+# Then visit http://localhost:8000
 ```
 
 ## 📱 QR Codes
@@ -169,9 +190,10 @@ The site is built mobile-first and includes:
 2. Look for failed builds (red X marks)
 3. Click on the failed action to see error details
 
-### YAML Syntax Errors?
-- Use a YAML validator like [yamllint.com](https://yamllint.com)
-- Check indentation (use spaces, not tabs)
+### CSV/YAML Syntax Errors?
+- **CSV**: Check for missing commas, extra quotes, or line breaks in fields
+- **YAML**: Use a validator like [yamllint.com](https://yamllint.com)
+- Check indentation (use spaces, not tabs) in YAML files
 - Ensure quotes around special characters
 
 ### Missing Speaker Images?
@@ -179,13 +201,22 @@ The site is built mobile-first and includes:
 - Use HTTPS URLs when possible
 - Consider using placeholder images for testing
 
+## 📁 Additional Files
+
+This project also includes:
+- **`CSV_INSTRUCTIONS.md`** - Detailed guide for editing the CSV schedule
+- **`schedule_template.csv`** - Template for creating new schedules
+- **`csv_to_yaml_converter.py`** - Utility to migrate old YAML schedules
+- **`run_local.py`** - Local development server with auto-reload
+
 ## 🤝 Support
 
 Need help? Here are your options:
 
-1. **Check the Issues**: Look at existing GitHub issues
-2. **Create an Issue**: Describe your problem with examples
-3. **Community Help**: Ask in discussions section
+1. **Check `CSV_INSTRUCTIONS.md`** - Comprehensive CSV editing guide
+2. **Check the Issues**: Look at existing GitHub issues
+3. **Create an Issue**: Describe your problem with examples
+4. **Community Help**: Ask in discussions section
 
 ## 📄 License
 

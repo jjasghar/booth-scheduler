@@ -1,0 +1,3 @@
+date,day_name,time,duration,title,presenter,presenter_title,company,abstract,speaker_image,speaker_links
+2024-03-15,Day 1 - Friday,09:00,20 min,Your Talk Title Here,Speaker Name,Job Title,Company Name,Brief description of the talk content and what attendees will learn.,https://via.placeholder.com/150x150/0f62fe/white?text=SN,"LinkedIn:https://linkedin.com/in/username,GitHub:https://github.com/username"
+2024-03-15,Day 1 - Friday,09:30,15 min,Another Talk Title,Jane Doe,Senior Engineer,Tech Corp,Another interesting talk description that explains the value to attendees.,https://via.placeholder.com/150x150/0f62fe/white?text=JD,"Portfolio:https://janedoe.dev,Twitter:https://twitter.com/janedoe" 

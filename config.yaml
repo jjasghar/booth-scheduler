@@ -1,0 +1,19 @@
+conference:
+  name: "IBM Developer Conference 2024"
+  booth_name: "IBM Innovation Hub"
+  location: "Hall A, Booth 123"
+  description: "Discover the latest IBM technologies and solutions. Join us for insightful 15-20 minute talks from IBM experts and partners!"
+
+# Website settings
+website:
+  title_suffix: "Schedule"
+  footer_text: "Schedule generated with ❤️ using Python"
+  show_duration_badges: false    # Show duration badges next to talk times
+  show_format_info: false        # Show format info section (duration/format details)
+  
+# Styling options
+branding:
+  primary_color: "#0f62fe"    # IBM Blue
+  secondary_color: "#ff6e6e"  # IBM Coral
+  font_family: "IBM Plex Sans"
+  logo_url: "https://via.placeholder.com/120x40/0f62fe/ffffff?text=IBM+LOGO"  # Optional: URL to conference/company logo 

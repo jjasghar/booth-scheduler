@@ -6,17 +6,73 @@ Generates a responsive conference booth schedule website from YAML data.
 
 import os
 import yaml
+import csv
 import qrcode
 from jinja2 import Environment, FileSystemLoader
 from datetime import datetime
 import io
 import base64
+from collections import defaultdict
 
 
-def load_schedule_data(yaml_file='schedule.yaml'):
-    """Load schedule data from YAML file."""
-    with open(yaml_file, 'r') as file:
+def load_config_data(config_file='config.yaml'):
+    """Load configuration data from YAML file."""
+    with open(config_file, 'r') as file:
         return yaml.safe_load(file)
+
+
+def load_schedule_data(csv_file='schedule.csv'):
+    """Load schedule data from CSV file."""
+    schedule_data = defaultdict(list)
+    
+    with open(csv_file, 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            # Parse speaker links
+            speaker_links = []
+            if row['speaker_links'].strip():
+                links = row['speaker_links'].split(',')
+                for link in links:
+                    if ':' in link:
+                        name, url = link.split(':', 1)
+                        speaker_links.append({
+                            'name': name.strip(),
+                            'url': url.strip()
+                        })
+            
+            # Create talk object
+            talk = {
+                'time': row['time'].strip(),
+                'duration': row['duration'].strip(),
+                'title': row['title'].strip(),
+                'presenter': row['presenter'].strip(),
+                'presenter_title': row['presenter_title'].strip(),
+                'company': row['company'].strip(),
+                'abstract': row['abstract'].strip(),
+                'speaker_image': row['speaker_image'].strip(),
+                'speaker_links': speaker_links
+            }
+            
+            # Group by date
+            date_key = row['date'].strip()
+            day_name = row['day_name'].strip()
+            
+            # Find existing day or create new one
+            day_found = False
+            for day in schedule_data['days']:
+                if day['date'] == date_key:
+                    day['talks'].append(talk)
+                    day_found = True
+                    break
+            
+            if not day_found:
+                schedule_data['days'].append({
+                    'date': date_key,
+                    'day_name': day_name,
+                    'talks': [talk]
+                })
+    
+    return dict(schedule_data)
 
 
 def generate_qr_code(url):
@@ -59,8 +115,12 @@ def generate_site():
     """Generate the complete static site."""
     print("🚀 Generating booth scheduler website...")
     
-    # Load data
-    data = load_schedule_data()
+    # Load configuration and schedule data
+    config = load_config_data()
+    schedule = load_schedule_data()
+    
+    # Combine data for template
+    data = {**config, **schedule}
     
     # Setup Jinja2 environment
     env = Environment(loader=FileSystemLoader('templates'))
